@@ -1,0 +1,80 @@
+@import '../Layout/spacing.scss';
+
+.flex {
+  display: flex;
+
+  &.flex-column {
+    flex-direction: column;
+  }
+  &.flex-row {
+    flex-direction: row;
+  }
+
+  &.align-items-start {
+    align-items: flex-start;
+  }
+
+  &.align-items-center {
+    align-items: center;
+  }
+
+  &.align-items-end {
+    align-items: flex-end;
+  }
+
+  &.align-self-end {
+    align-self: flex-end;
+  }
+
+  &.align-items-stretch {
+    align-items: stretch;
+  }
+
+  &.align-self-start {
+    align-self: flex-start;
+  }
+
+  &.justify-content-start {
+    justify-content: flex-start;
+  }
+
+  &.justify-content-end {
+    justify-content: flex-end;
+  }
+
+  &.justify-content-center {
+    justify-content: center;
+  }
+
+  &.justify-content-around {
+    justify-content: space-around;
+  }
+
+  &.justify-content-evenly {
+    justify-content: space-evenly;
+  }
+
+  &.justify-content-between {
+    justify-content: space-between;
+  }
+
+  &.flex-grow-children > * {
+    flex: 1;
+  }
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.tiny-gap {
+    gap: $tiny;
+  }
+
+  &.small-gap {
+    gap: $small;
+  }
+
+  &.normal-gap {
+    gap: $normal;
+  }
+}

@@ -1,0 +1,42 @@
+@import '../../components/Layout/spacing.scss';
+@import '../../components/Layout/palette.scss';
+
+$search-width: 250px;
+
+.ant-table-filter-dropdown {
+  border-radius: $small;
+}
+
+.table-search {
+  padding: $small;
+  width: $search-width;
+
+  > * {
+    margin-bottom: $small;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .ant-btn {
+    margin-right: $small;
+
+    &:last-child {
+      margin-right: inherit;
+    }
+  }
+}
+
+.active-filter {
+  color: white;
+}
+
+.table-search-highlight {
+  mark {
+    background-color: var(--primary-color);
+    padding: $small 0;
+    color: white;
+    font-weight: bold;
+  }
+}

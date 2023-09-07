@@ -1,0 +1,33 @@
+@import '../../components/Layout/palette';
+@import '../../components/Layout/skeleton';
+@import '../../components/Layout/sizings';
+
+.skeleton-table {
+  &.is-loading {
+    table > tbody > tr > td > div {
+      @include includeLoadingSkeleton();
+    }
+  }
+
+  &.fixed-header {
+    overflow: auto;
+
+    .ant-table-title {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .ant-table-title + .ant-table-container {
+      th {
+        top: $table-header-title-height;
+      }
+    }
+  }
+}
