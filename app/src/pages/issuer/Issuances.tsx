@@ -9,10 +9,20 @@ import { NetworkError } from '../../components/NetworkError/NetworkError'
 // import { SetupIssuance } from '../create-issuance/SetupIssuance'
 import { IssuancesTable } from './IssuancesTable'
 
+const issuanceList = [{
+  name: 'Test',
+  issuer: '0x35BE4f1Aa18AD52D606E9B2eA257A3416e8030fF',
+  targetValue: 1000000,
+  minimumLotsValue: 1000,
+  remainingValue: 1000000,
+  investors: 0,
+  isClosed: false,
+}];
+
 export const Issuances = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [issuanceTableItems, setIssuanceTableItems] = useState([])
-  const [issuances, setIssuances] = useState([])
+  const [issuanceTableItems, setIssuanceTableItems] = useState(issuanceList)
+  const [issuances, setIssuances] = useState(issuanceList)
   const [issuance, setIssuance] = useState(null)
 
   const onCreateIssuanceClick = () => {

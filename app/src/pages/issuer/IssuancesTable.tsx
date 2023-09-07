@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import classNames from 'classnames'
-import { useState } from 'react'
 
 import { Column, Row } from '../../components/Flex'
 import { SkeletonTable } from '../../components/SkeletonTable/SkeletonTable'
@@ -15,8 +14,6 @@ interface Props {
   isLoading?: boolean
 }
 export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLoading = false }: Props) => {
-  const [tableItems, setTableItems] = useState([])
-
   const issuancesColumns = buildIssuancesColumns({ onIssuanceActionClick })
 
   return (
@@ -26,8 +23,7 @@ export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLo
           <Statistic title="Currency" value="AUD" />
           <Statistic
             title="Open"
-            value={formatCurrency({ value: sumTargetValues({ tableItems }) })}
-            subtitle={tableItems.length}
+            value={formatCurrency({ value: sumTargetValues({ tableItems: issuanceTableItems }) })}
           />
         </Row>
         <Button onClick={() => onIssuanceActionClick()} type="primary" size="large">
@@ -38,7 +34,7 @@ export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLo
         <SkeletonTable
           loading={isLoading}
           columns={issuancesColumns as any[]}
-          dataSource={tableItems}
+          dataSource={issuanceTableItems}
           rowKey="entityId"
           data-testid="issuances-table"
           fixedHeader
