@@ -10,6 +10,7 @@ import { NetworkError } from '../../../components/NetworkError/NetworkError'
 import { IssuancesTable } from './IssuancesTable'
 import { hooks, metaMask } from '../../../metamask-connector'
 import { constants } from '../../../config/constants'
+import { CreateIssuanceModal } from '../CreateIssuance/CreateIssuanceModal'
 
 const issuanceList = [{
   name: 'Test',
@@ -26,7 +27,6 @@ export const Issuances = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [issuanceTableItems, setIssuanceTableItems] = useState(issuanceList);
   const [issuances, setIssuances] = useState(issuanceList);
-  const [issuance, setIssuance] = useState(null);
 
   const isActive = useIsActive();
 
@@ -37,12 +37,10 @@ export const Issuances = () => {
   }, []);
 
   const onCreateIssuanceClick = () => {
-    setIssuance(null);
     setIsModalVisible(true);
   };
 
   const closeModal = useCallback(() => {
-    setIssuance(null);
     setIsModalVisible(false);
   }, []);
 
@@ -62,12 +60,12 @@ export const Issuances = () => {
         ) : (
           <IssuancesTable
             issuanceTableItems={issuanceTableItems}
-            onIssuanceActionClick={(params) => {}}
+            onIssuanceActionClick={onCreateIssuanceClick}
             isLoading={!issuanceTableItems.length}
           />
         )}
       </NetworkError>
-      {/* <SetupIssuance issuance={issuance} visible={isModalVisible} onClose={closeModal} /> */}
+      <CreateIssuanceModal visible={isModalVisible} onClose={closeModal} />
     </Column>
   ) : (
     <Column className="empty-state" alignItemsCenter contentCenter>

@@ -10,7 +10,7 @@ import { buildIssuancesColumns } from './issuances-table-columns'
 
 interface Props {
   issuanceTableItems: any[]
-  onIssuanceActionClick: ({ issuanceEntityId }?: { issuanceEntityId: any }) => void
+  onIssuanceActionClick: () => void
   isLoading?: boolean
 }
 export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLoading = false }: Props) => {
@@ -26,7 +26,7 @@ export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLo
             value={formatCurrency({ value: sumTargetValues({ tableItems: issuanceTableItems }) })}
           />
         </Row>
-        <Button onClick={() => onIssuanceActionClick()} type="primary" size="large">
+        <Button onClick={onIssuanceActionClick} type="primary" size="large">
           Create Issuance
         </Button>
       </Row>

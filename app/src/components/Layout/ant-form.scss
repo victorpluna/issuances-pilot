@@ -17,12 +17,14 @@
 
   .ant-input,
   .ant-input-number,
+  .ant-input-number-affix-wrapper,
   .ant-select .ant-select-selector,
   .ant-picker {
     border-radius: $tiny;
   }
 
   .ant-input-number,
+  .ant-input-number-affix-wrapper,
   .ant-picker {
     width: 100%;
   }

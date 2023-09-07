@@ -10,7 +10,7 @@ export const constants = {
   // twelveHourTimeFormat: 'h:mm A',
   // defaultInvestorEntityId: process.env.DEFAULT_INVESTOR_ENTITY_ID || 'VALIDINVESTOR',
   // platformTitle: 'Issuance Platform',
-  // inputCurrencyPrecision: 3,
+  inputCurrencyPrecision: 3,
   // marginPrecision: 4,
   currencyMultiplicationFactor: 1_000,
   currencyMultiplicationAbbreviation: 'T',
