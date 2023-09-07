@@ -107,3 +107,12 @@ $create-issuance-height: 60vh;
     }
   }
 }
+
+.empty-state {
+  flex: 1;
+  gap: 60px;
+
+  .flex-column {
+    gap: 20px;
+  }
+}

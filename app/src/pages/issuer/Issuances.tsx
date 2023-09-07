@@ -1,13 +1,14 @@
 import './issuances.scss'
 
 import { Button } from 'antd'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Empty } from '../../components/Empty/Empty'
 import { Column } from '../../components/Flex/Flex'
 import { NetworkError } from '../../components/NetworkError/NetworkError'
 // import { SetupIssuance } from '../create-issuance/SetupIssuance'
 import { IssuancesTable } from './IssuancesTable'
+import { hooks, metaMask } from '../../metamask-connector'
 
 const issuanceList = [{
   name: 'Test',
@@ -20,22 +21,36 @@ const issuanceList = [{
 }];
 
 export const Issuances = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [issuanceTableItems, setIssuanceTableItems] = useState(issuanceList)
-  const [issuances, setIssuances] = useState(issuanceList)
-  const [issuance, setIssuance] = useState(null)
+  const { useChainId, useAccounts, useIsActivating, useIsActive, useProvider, useENSNames } = hooks;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [issuanceTableItems, setIssuanceTableItems] = useState(issuanceList);
+  const [issuances, setIssuances] = useState(issuanceList);
+  const [issuance, setIssuance] = useState(null);
+
+  const isActive = useIsActive();
+
+  useEffect(() => {
+    // window.ethereum && metaMask.activate(1);
+    void metaMask.connectEagerly().catch(() => {
+      console.debug('Failed to connect eagerly to metamask');
+    })
+  }, []);
 
   const onCreateIssuanceClick = () => {
-    setIssuance(null)
-    setIsModalVisible(true)
-  }
+    setIssuance(null);
+    setIsModalVisible(true);
+  };
 
   const closeModal = useCallback(() => {
-    setIssuance(null)
-    setIsModalVisible(false)
-  }, [])
+    setIssuance(null);
+    setIsModalVisible(false);
+  }, []);
 
-  return (
+  const activateConnector = () => {
+    metaMask.activate(1);
+  };
+
+  return isActive ? (
     <Column className="issuances-container" flex={1}>
       <NetworkError error={null}>
         {issuances?.length === 0 ? (
@@ -54,5 +69,16 @@ export const Issuances = () => {
       </NetworkError>
       {/* <SetupIssuance issuance={issuance} visible={isModalVisible} onClose={closeModal} /> */}
     </Column>
-  )
+  ) : (
+    <Column className="empty-state" alignItemsCenter contentCenter>
+      <img alt="logo" src="/images/empty-state.png" />
+      <Column>
+        <h3>Wallet connection</h3>
+        <p>Let's connect with your wallet</p>
+      </Column>
+      <Button type="primary" className="confirm-button" onClick={activateConnector}>
+        Connect Wallet
+      </Button>
+    </Column>
+  );
 }
