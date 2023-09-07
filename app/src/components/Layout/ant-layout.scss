@@ -1,0 +1,36 @@
+@import './sizings.scss';
+
+.ant-layout {
+  height: 100vh;
+  background-color: var(--background-main-color);
+  color: var(--background-main-contrast-color);
+
+  .ant-layout-content {
+    display: flex;
+
+    > .ant-spin {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+    }
+  }
+
+  .ant-layout-header {
+    height: $ant-layout-header-height;
+    background-color: var(--header-color);
+    color: var(--header-contrast-color);
+    padding: 0 $normal;
+
+    h4 {
+      color: var(--header-contrast-color);
+    }
+
+    img {
+      margin-right: $tiny;
+    }
+  }
+
+  .ant-layout-footer {
+    background-color: var(--background-main-color);
+  }
+}

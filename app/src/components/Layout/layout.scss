@@ -1,0 +1,61 @@
+@import './spacing.scss';
+@import './capitalize.scss';
+@import './palette.scss';
+
+@import './ant-upload.scss';
+@import './ant-form.scss';
+@import './ant-modal.scss';
+@import './ant-button.scss';
+@import './ant-input.scss';
+@import './ant-table.scss';
+@import './ant-select.scss';
+@import './ant-statistic.scss';
+@import './ant-picker.scss';
+@import './ant-tabs.scss';
+@import './ant-layout.scss';
+@import './ant-icon.scss';
+@import './ant-popover.scss';
+@import './ant-breadcrumb.scss';
+@import './ant-empty.scss';
+@import './ant-drawer.scss';
+@import './ant-result.scss';
+@import './ant-badge.scss';
+@import './ant-spin.scss';
+@import './ant-notification.scss';
+@import './ant-segmented.scss';
+
+.layout {
+  h1 {
+    color: var(--background-main-contrast-color);
+  }
+
+  .ant-layout-header {
+    img {
+      margin-right: $tiny;
+    }
+
+    .ant-btn-round {
+      background-color: $grey-400;
+      margin-left: $tiny;
+
+      &:hover,
+      &:focus {
+        background-color: $grey-200;
+      }
+    }
+  }
+
+  .ant-layout-footer {
+    background-color: var(--background-main-color);
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ant-tooltip.tooltip-initial-max-width {
+  max-width: initial;
+}

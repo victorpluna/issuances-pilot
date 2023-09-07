@@ -1,0 +1,63 @@
+@import './spacing.scss';
+@import './palette.scss';
+
+$modal-padding: $large;
+
+.ant-modal-root {
+  .ant-modal-header {
+    padding: $modal-padding;
+
+    .ant-modal-title {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 0;
+    background-color: var(--background-main-color);
+    color: var(--background-main-contrast-color);
+  }
+
+  .ant-modal-footer {
+    padding: $normal $modal-padding;
+  }
+
+  .ant-modal-content {
+    border-radius: $small;
+  }
+
+  .ant-modal-header {
+    border-top-left-radius: $small;
+    border-top-right-radius: $small;
+  }
+
+  .ant-modal-close {
+    top: $normal;
+    right: $modal-padding;
+
+    .ant-modal-close-x {
+      width: inherit;
+      height: inherit;
+      line-height: inherit;
+
+      .ant-modal-close-icon {
+        $close-icon-size: 3.5rem;
+
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $close-icon-size;
+        width: $close-icon-size;
+        color: var(--primary-contrast-color);
+        background-color: var(--primary-color);
+        border-radius: $tiny;
+
+        &:hover {
+          background-color: var(--primary-color-hover);
+        }
+      }
+    }
+  }
+}

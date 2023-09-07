@@ -1,0 +1,21 @@
+.ant-breadcrumb ol li {
+  > span,
+  .ant-breadcrumb-separator {
+    color: var(--background-main-contrast-color);
+
+    a {
+      color: var(--background-main-contrast-color);
+    }
+  }
+  span {
+    a:hover,
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &:last-child > span,
+  &:last-child > span a {
+    color: var(--primary-color);
+  }
+}

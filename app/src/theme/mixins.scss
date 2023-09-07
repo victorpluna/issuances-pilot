@@ -1,0 +1,44 @@
+@mixin create-theme-color($color-name, $value, $hover: 0.4) {
+  #{$color-name}-h: hue($value);
+  #{$color-name}-s: saturation($value);
+  #{$color-name}-l: lightness($value);
+  #{$color-name}: hsl(var(#{$color-name + '-h'}), var(#{$color-name + '-s'}), calc(var(#{$color-name + '-l'})));
+  #{$color-name}-hover: hsla(
+    var(#{$color-name + '-h'}),
+    var(#{$color-name + '-s'}),
+    var(#{$color-name + '-l'}),
+    $hover
+  );
+}
+
+@function alpha($color-name, $opacity) {
+  @return hsla(var(#{$color-name + '-h'}), var(#{$color-name + '-s'}), var(#{$color-name + '-l'}), $opacity);
+}
+
+@function change-lightness($color-name, $lightness) {
+  @return hsl(var(#{$color-name + '-h'}), var(#{$color-name + '-s'}), calc(var(#{$color-name + '-l'}) + #{$lightness}));
+}
+
+@mixin include-primary-colors() {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-contrast-color);
+
+  &:focus,
+  &:active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-contrast-color);
+  }
+
+  &:hover {
+    background-color: var(--primary-color-hover);
+    border-color: var(--primary-color-hover);
+    color: var(--primary-contrast-color);
+  }
+}
+
+@mixin include-input-focus-style() {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px alpha(--primary-color, 20%);
+}

@@ -1,0 +1,25 @@
+@import './palette.scss';
+@import './font-size.scss';
+@import './spacing.scss';
+
+.ant-statistic {
+  &-title {
+    color: var(--primary-color);
+    text-transform: uppercase;
+
+    .ant-breadcrumb {
+      text-transform: initial;
+    }
+  }
+
+  &-content {
+    color: var(--background-main-contrast-color);
+  }
+
+  &-subtitle {
+    color: $grey-500;
+    font-size: $font-small;
+    height: 0.8rem;
+    margin-top: $tiny;
+  }
+}

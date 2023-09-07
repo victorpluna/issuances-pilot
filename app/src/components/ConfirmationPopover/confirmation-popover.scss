@@ -1,0 +1,39 @@
+@import '../../components/Layout/spacing.scss';
+@import '../../components/Layout/font-size.scss';
+@import '../../components/Layout/palette.scss';
+@import '../../theme/mixins.scss';
+
+$popover-radius: $small;
+
+.confirmation-popover {
+  .ant-popover {
+    &-inner {
+      $extra-space-to-avoid-glitch-in-border: 2;
+      border-radius: $popover-radius + $extra-space-to-avoid-glitch-in-border;
+    }
+
+    &-title {
+      border-top-left-radius: $popover-radius;
+      border-top-right-radius: $popover-radius;
+
+      background-color: change-lightness(--background-main-color, 10%);
+      color: var(--background-main-color);
+      text-transform: uppercase;
+      text-align: center;
+      padding: $small;
+    }
+
+    &-inner-content > .react-display-flex {
+      gap: $small;
+      margin-bottom: $small;
+
+      > .react-display-flex {
+        gap: $tiny;
+
+        button {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

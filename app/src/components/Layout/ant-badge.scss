@@ -1,0 +1,16 @@
+.ant-badge {
+  .ant-badge-count {
+    background-color: var(--primary-color);
+
+    span {
+      color: var(--primary-contrast-color);
+      font-weight: bold;
+    }
+  }
+
+  .ant-btn-loading {
+    &::before {
+      z-index: 0;
+    }
+  }
+}

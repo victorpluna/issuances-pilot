@@ -1,0 +1,13 @@
+.ant-empty {
+  .ant-empty-image {
+    height: 10rem;
+  }
+
+  .ant-empty-description {
+    h1 {
+      margin: $normal;
+      margin-bottom: $extra-large;
+      color: var(--background-main-contrast-opaque-color);
+    }
+  }
+}

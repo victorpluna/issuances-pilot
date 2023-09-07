@@ -1,0 +1,6 @@
+@mixin setIsDisabled($opacity: 0.4) {
+  $disabled-opacity: $opacity;
+
+  pointer-events: none;
+  opacity: $disabled-opacity;
+}

@@ -1,0 +1,99 @@
+@import './palette.scss';
+@import './spacing.scss';
+@import './font-size.scss';
+@import '../../theme/mixins.scss';
+
+$popover-radius: $small;
+$input-font-size: $font-large;
+$title-background-color: $grey-700;
+$title-color: white;
+
+.ant-popover {
+  &-inner-content {
+    white-space: pre-wrap;
+  }
+}
+
+.modal-popover {
+  width: 25rem;
+
+  &.ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow {
+    border-top-color: $title-background-color;
+    border-left-color: $title-background-color;
+  }
+
+  .ant-popover-inner {
+    $extra-space-to-avoid-glitch-in-border: 2;
+    border-radius: $popover-radius + $extra-space-to-avoid-glitch-in-border;
+  }
+
+  .ant-popover-title {
+    border-top-left-radius: $popover-radius;
+    border-top-right-radius: $popover-radius;
+    background-color: $title-background-color;
+    text-transform: uppercase;
+    text-align: center;
+    padding: $small;
+    color: $title-color;
+
+    h3 {
+      color: $title-color;
+    }
+  }
+
+  .ant-popover-inner-content {
+    $inner-content-color: $grey-600;
+
+    border-radius: $popover-radius;
+    background-color: white;
+    color: $inner-content-color;
+
+    > div {
+      gap: $normal;
+    }
+
+    h4 {
+      text-align: center;
+      color: $inner-content-color;
+    }
+
+    .ant-picker {
+      background-color: var(--grey-input);
+      border-color: var(--grey-input);
+      font-size: $input-font-size;
+
+      .ant-picker-separator,
+      .ant-picker-suffix,
+      input::placeholder {
+        color: var(--primary-contrast-color);
+      }
+
+      &.active-filter,
+      &.ant-picker-focused {
+        border-color: var(--primary-color);
+      }
+
+      input {
+        font-size: $input-font-size;
+
+        &::placeholder {
+          color: $grey-60;
+        }
+      }
+    }
+
+    .ant-input-affix-wrapper-plus-minus {
+      background-color: var(--grey-input);
+      border-color: var(--grey-input);
+      font-size: $input-font-size;
+
+      input {
+        font-size: $input-font-size;
+      }
+    }
+
+    .ant-btn {
+      font-weight: bold;
+    }
+  }
+}

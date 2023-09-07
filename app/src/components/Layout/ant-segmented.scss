@@ -1,0 +1,16 @@
+@import './spacing.scss';
+@import './palette.scss';
+
+.ant-segmented {
+  border: 1px solid $grey-300;
+  border-radius: $tiny;
+  padding: 0;
+
+  .ant-segmented-item {
+    flex: 1;
+
+    &-selected {
+      border-radius: $tiny;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+@import '../../theme/mixins.scss';
+
+.ant-input,
+.ant-input-search .ant-input,
+.ant-input-number:not(.ant-input-number-borderless) {
+  &:focus {
+    @include include-input-focus-style;
+  }
+
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+.ant-checkbox {
+  &-input {
+    &:focus + .ant-checkbox-inner {
+      border-color: var(--primary-color);
+    }
+  }
+
+  &-inner {
+    border-color: var(--primary-color);
+  }
+
+  &-checked {
+    &:after {
+      border-color: var(--primary-color);
+    }
+  }
+
+  &-wrapper {
+    &:hover {
+      .ant-checkbox-inner {
+        border-color: var(--primary-color);
+      }
+    }
+
+    &-checked {
+      .ant-checkbox-inner {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  &-indeterminate {
+    .ant-checkbox-inner {
+      border-color: var(--primary-color);
+
+      &:after {
+        background-color: var(--primary-color);
+      }
+    }
+  }
+}
+
+.ant-input-number-focused:not(.ant-input-number-borderless) {
+  @include include-input-focus-style;
+}
+
+.ant-input-number {
+  .ant-input-number-handler-wrap {
+    display: none;
+  }
+}
+
+span.ant-input-affix-wrapper {
+  &-focused {
+    border-color: var(--primary-color);
+  }
+
+  input {
+    &:focus,
+    &:hover,
+    &:visited,
+    &:active {
+      border-color: var(--primary-color);
+    }
+  }
+}

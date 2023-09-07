@@ -1,0 +1,19 @@
+@import './palette.scss';
+
+.ant-drawer {
+  .ant-drawer-body {
+    background-color: var(--background-main-color);
+  }
+
+  &.light {
+    color: $grey-900;
+
+    .ant-drawer-title h3 {
+      color: $grey-900;
+    }
+
+    .ant-drawer-body {
+      background-color: $white;
+    }
+  }
+}

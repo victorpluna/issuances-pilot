@@ -1,0 +1,14 @@
+$base-factor: 6px;
+
+$unit-factor-tiny: 1;
+$unit-factor-small: 2;
+$unit-factor-normal: 4;
+$unit-factor-large: 8;
+$unit-factor-huge: 16;
+
+$tiny: $base-factor * $unit-factor-tiny; // 6
+$small: $base-factor * $unit-factor-small; // 12
+$normal: $base-factor * $unit-factor-normal; // 24
+$large: $normal + $small; // 36
+$extra-large: $base-factor * $unit-factor-large; // 48
+$huge: $base-factor * $unit-factor-huge; // 96

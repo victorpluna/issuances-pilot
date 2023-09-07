@@ -1,0 +1,82 @@
+@import './spacing.scss';
+@import './font-size.scss';
+@import './palette.scss';
+@import '../../theme/mixins.scss';
+
+$ant-tabs-text-color: alpha(--background-main-contrast-color, 40%);
+
+.ant-tabs {
+  &-top {
+    > .ant-tabs-nav::before {
+      border-color: alpha(--background-main-contrast-color, 10%);
+    }
+  }
+
+  &-nav {
+    background-color: transparent;
+    margin: 0;
+
+    &::before {
+      border-color: alpha(--background-main-contrast-color, 10%);
+    }
+  }
+
+  &-tabpane > * {
+    padding: $normal 0;
+
+    .ant-tabs-tabpane > * {
+      padding: $large 0;
+    }
+  }
+
+  > .ant-tabs-nav {
+    margin: 0;
+  }
+
+  .ant-tabs-tab {
+    span {
+      color: $ant-tabs-text-color;
+    }
+
+    &:hover {
+      color: var(--primary-color);
+    }
+
+    .ant-tabs-tab-btn {
+      > div {
+        color: $ant-tabs-text-color;
+      }
+
+      font-weight: bold;
+      color: $ant-tabs-text-color;
+    }
+
+    &.ant-tabs-tab-active .ant-tabs-tab-btn {
+      color: var(--primary-color);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+
+    .ant-tabs-tab-btn:active {
+      color: var(--primary-color);
+    }
+
+    .has-error {
+      color: $error-color;
+    }
+
+    .anticon {
+      font-size: $font-large;
+
+      &.anticon-exclamation-circle {
+        color: $error-color;
+      }
+    }
+  }
+
+  .ant-tabs-ink-bar {
+    background-color: var(--primary-color);
+  }
+}

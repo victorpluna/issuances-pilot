@@ -1,0 +1,22 @@
+@import './spacing.scss';
+@import './palette.scss';
+
+.ant-upload {
+  &.ant-upload-drag {
+    p.ant-upload-text {
+      font-weight: bold;
+    }
+
+    p.ant-upload-drag-icon {
+      margin: 0;
+      margin-right: $normal;
+      background-color: var(--background-main-color);
+      padding: $small;
+      border-radius: $tiny;
+    }
+  }
+
+  &.ant-upload-drag:not(.ant-upload-disabled):hover {
+    border-color: var(--primary-color);
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../theme/mixins.scss';
+
+.is-loading-skeleton {
+  background: linear-gradient(
+    -90deg,
+    var(--background-main-color) 0%,
+    change-lightness(--background-main-color, -10%) 50%,
+    var(--background-main-color) 100%
+  );
+  pointer-events: none;
+  animation: pulse 1.2s ease-in-out infinite;
+  background-size: 400% 400%;
+
+  * {
+    visibility: hidden;
+  }
+}
+
+.is-loading-light-skeleton {
+  background: linear-gradient(
+    -90deg,
+    var(--background-main-contrast-color) 0%,
+    change-lightness(--background-main-contrast-color, -10%) 50%,
+    var(--background-main-contrast-color) 100%
+  );
+  pointer-events: none;
+  animation: pulse 1.2s ease-in-out infinite;
+  background-size: 400% 400%;
+
+  * {
+    visibility: hidden;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -135% 0%;
+  }
+}
+
+@mixin includeLoadingSkeleton($include-content: true, $dark: false, $rounded: false, $size: 'lg') {
+  @if $dark {
+    @extend .is-loading-light-skeleton;
+  } @else {
+    @extend .is-loading-skeleton;
+  }
+
+  @if $size == 'sm' {
+    width: 30%;
+  }
+
+  @if $size == 'md' {
+    width: 70%;
+  }
+
+  @if $rounded {
+    border-radius: 1.5rem;
+  }
+
+  @if $include-content {
+    &::before {
+      content: '\00a0';
+    }
+  }
+}

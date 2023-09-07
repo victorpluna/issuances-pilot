@@ -1,0 +1,32 @@
+@import '../../theme/mixins.scss';
+
+.ant-btn {
+  border-radius: $tiny;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--primary-color-hover);
+    color: var(--primary-color-hover);
+  }
+
+  &-primary {
+    @include include-primary-colors;
+  }
+
+  &-link {
+    color: var(--primary-color);
+
+    &:focus,
+    &:active,
+    &:hover {
+      color: var(--primary-color-hover);
+    }
+  }
+
+  &-lg {
+    height: 3.5rem;
+    padding-left: $normal;
+    padding-right: $normal;
+  }
+}

@@ -1,0 +1,11 @@
+@import '../../theme/mixins.scss';
+
+.ant-picker {
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+.ant-picker-focused {
+  @include include-input-focus-style;
+}

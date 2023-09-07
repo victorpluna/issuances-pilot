@@ -1,0 +1,33 @@
+@import './palette.scss';
+@import './spacing.scss';
+
+.ant-form {
+  .ant-form-item {
+    margin-bottom: 0;
+
+    &-label {
+      padding-bottom: $tiny;
+      opacity: $text-opacity;
+    }
+
+    &-control {
+      height: 3.5rem;
+    }
+  }
+
+  .ant-input,
+  .ant-input-number,
+  .ant-select .ant-select-selector,
+  .ant-picker {
+    border-radius: $tiny;
+  }
+
+  .ant-input-number,
+  .ant-picker {
+    width: 100%;
+  }
+
+  .ant-divider-horizontal {
+    margin: $small 0;
+  }
+}

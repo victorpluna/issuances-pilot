@@ -1,0 +1,64 @@
+@import '../components/Layout/mixins.scss';
+@import '../components/Layout/palette.scss';
+@import '../theme/mixins.scss';
+
+$colors: (
+  headerColor: #fff,
+  headerContrastColor: $grey-400,
+  primaryColor: $primary-color,
+  primaryContrastColor: $grey-900,
+  backgroundMainColor: $grey-100,
+  backgroundMainContrastColor: $grey-900,
+);
+
+:root {
+  --w3m-z-index: 1001 !important;
+  --actions-hover: 0.8;
+
+  @include create-theme-color(--primary-color, map-get($colors, 'primaryColor'), var(--actions-hover));
+  @include create-theme-color(--primary-contrast-color, map-get($colors, 'primaryContrastColor'), var(--actions-hover));
+
+  @include create-theme-color(--header-color, map-get($colors, 'headerColor'), var(--actions-hover));
+  @include create-theme-color(--header-contrast-color, map-get($colors, 'headerContrastColor'), var(--actions-hover));
+
+  @include create-theme-color(--background-main-color, map-get($colors, 'backgroundMainColor'), var(--actions-hover));
+  @include create-theme-color(
+    --background-main-contrast-color,
+    map-get($colors, 'backgroundMainContrastColor'),
+    var(--actions-hover)
+  );
+
+  --grey-50: #{$grey-50};
+  --grey-100: #{$grey-100};
+  --grey-200: #{$grey-200};
+  --grey-300: #{$grey-300};
+  --grey-400: #{$grey-400};
+  --grey-500: #{$grey-500};
+  --grey-600: #{$grey-600};
+  --grey-700: #{$grey-700};
+  --grey-800: #{$grey-800};
+  --grey-900: #{$grey-900};
+  --grey-A100: #{$grey-A100};
+  --grey-A200: #{$grey-A200};
+  --grey-A400: #{$grey-A400};
+  --grey-A700: #{$grey-A700};
+
+  --grey-input: #{$grey-A100};
+
+  --background-main-contrast-opaque-color: #{alpha(--background-main-contrast-color, 30%)};
+
+  --primary-box-shadow: 0 0 0 1px var(--primary-color);
+
+  --status-pending: #{$status-pending};
+  --status-sent: #{$status-sent};
+  --status-open: var(--grey-300);
+  --status-accepted: #{$status-accepted};
+  --status-settled: #{$status-settled};
+  --status-rejected: #{$status-rejected};
+}
+
+:export {
+  @each $key, $value in $colors {
+    #{$key}: $value;
+  }
+}

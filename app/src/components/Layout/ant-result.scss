@@ -1,0 +1,8 @@
+.ant-result {
+  &-error {
+    .ant-result-title,
+    .ant-result-subtitle {
+      color: var(--background-main-contrast-color);
+    }
+  }
+}

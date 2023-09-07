@@ -1,0 +1,107 @@
+@import './font-size.scss';
+@import '../../theme/mixins.scss';
+
+$table-text-color: alpha(--background-main-contrast-color, 50%);
+$table-hover-color: change-lightness(--background-main-color, 5%);
+
+.ant-table {
+  table > thead {
+    tr:first-child {
+      th:first-child,
+      th:last-child {
+        border-radius: 0;
+      }
+    }
+  }
+
+  .ant-table-title {
+    background: var(--background-main-color);
+    border-radius: 0;
+  }
+
+  &-thead {
+    tr > th {
+      background: var(--background-main-color);
+      text-transform: uppercase;
+      border-bottom-width: 0;
+      color: var(--background-main-contrast-color);
+
+      &.ant-table-column-has-sorters {
+        &:hover {
+          background: $table-hover-color;
+
+          .ant-table-filter-trigger-container {
+            background: $table-hover-color;
+          }
+        }
+      }
+
+      &.ant-table-column-sort {
+        background-color: change-lightness(--background-main-color, 2%);
+      }
+    }
+  }
+
+  tbody.ant-table-tbody {
+    .ant-table-row:hover > td,
+    .ant-table-row:hover > td.ant-table-cell,
+    .ant-table-row > td.ant-table-cell-row-hover,
+    .ant-table-tbody tr:nth-child(even):hover > td {
+      background-color: $table-hover-color;
+    }
+
+    tr {
+      color: $table-text-color;
+
+      :hover > td {
+        background-color: $table-hover-color;
+      }
+
+      &:nth-child(odd) {
+        background-color: change-lightness(--background-main-color, 2%);
+      }
+
+      &:nth-child(even) {
+        background: var(--background-main-color);
+      }
+
+      > td {
+        border-bottom-width: 0;
+      }
+
+      &.ant-table-row-selected > td {
+        background-color: inherit;
+      }
+    }
+  }
+
+  &-column-sorter-up.active,
+  &-column-sorter-down.active {
+    color: var(--primary-color);
+  }
+
+  td.ant-table-column-sort {
+    background: transparent;
+  }
+
+  .ant-badge {
+    .ant-badge-status-text {
+      color: $table-text-color;
+    }
+  }
+
+  .ant-empty {
+    &-image {
+      height: 5rem;
+    }
+
+    &-description {
+      color: $table-text-color;
+      font-size: $font-large;
+    }
+  }
+}
+
+.ant-table-empty .ant-table-tbody > tr.ant-table-placeholder:hover > td {
+  background-color: $table-hover-color;
+}
