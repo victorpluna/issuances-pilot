@@ -6,10 +6,10 @@ import {
   sortBoolean,
   sortNumericColumn,
   sortTextColumn,
-} from '../../components/tables'
-import { divideByCurrencyMultiplicationFactor, toFixed } from '../../formatters'
-import { constants } from '../../config/constants'
-import { minifyAddress } from '../../formatters/web3'
+} from '../../../components/tables'
+import { divideByCurrencyMultiplicationFactor, toFixed } from '../../../formatters'
+import { constants } from '../../../config/constants'
+import { minifyAddress } from '../../../formatters/web3'
 
 export const buildIssuancesColumns = ({
   onIssuanceActionClick,

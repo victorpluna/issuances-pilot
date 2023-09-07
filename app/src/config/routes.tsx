@@ -1,5 +1,5 @@
 import { RouteProps } from 'react-router-dom'
-import { Issuances } from '../pages/issuer/Issuances'
+import { Issuances } from '../pages/issuer/Issuances/Issuances'
 
 
 export const routePaths = {

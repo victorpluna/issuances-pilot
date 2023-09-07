@@ -3,13 +3,13 @@ import './issuances.scss'
 import { Button } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
 
-import { Empty } from '../../components/Empty/Empty'
-import { Column } from '../../components/Flex/Flex'
-import { NetworkError } from '../../components/NetworkError/NetworkError'
+import { Empty } from '../../../components/Empty/Empty'
+import { Column } from '../../../components/Flex/Flex'
+import { NetworkError } from '../../../components/NetworkError/NetworkError'
 // import { SetupIssuance } from '../create-issuance/SetupIssuance'
 import { IssuancesTable } from './IssuancesTable'
-import { hooks, metaMask } from '../../metamask-connector'
-import { constants } from '../../config/constants'
+import { hooks, metaMask } from '../../../metamask-connector'
+import { constants } from '../../../config/constants'
 
 const issuanceList = [{
   name: 'Test',
