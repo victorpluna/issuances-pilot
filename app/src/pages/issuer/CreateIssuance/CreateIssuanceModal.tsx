@@ -1,6 +1,6 @@
 import { Button, Modal } from 'antd';
 import { Formik, FormikProps } from 'formik';
-import { Form, FormItem, Input, InputNumber } from 'formik-antd'
+import { Form, FormItem, Input } from 'formik-antd'
 import { Row } from 'react-display-flex';
 
 import { createIssuanceInformationSchema, initialValues } from './issuance-form-schema';

@@ -6,7 +6,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { Empty } from '../../../components/Empty/Empty'
 import { Column } from '../../../components/Flex/Flex'
 import { NetworkError } from '../../../components/NetworkError/NetworkError'
-// import { SetupIssuance } from '../create-issuance/SetupIssuance'
 import { IssuancesTable } from './IssuancesTable'
 import { hooks, metaMask } from '../../../metamask-connector'
 import { constants } from '../../../config/constants'
@@ -23,10 +22,9 @@ const issuanceList = [{
 }];
 
 export const Issuances = () => {
-  const { useChainId, useAccounts, useIsActivating, useIsActive, useProvider, useENSNames } = hooks;
+  const { useIsActive } = hooks;
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [issuanceTableItems, setIssuanceTableItems] = useState(issuanceList);
-  const [issuances, setIssuances] = useState(issuanceList);
+  const [issuances, setIssuances] = useState([]);
 
   const isActive = useIsActive();
 
@@ -34,6 +32,7 @@ export const Issuances = () => {
     void metaMask.connectEagerly().catch(() => {
       console.debug('Failed to connect eagerly to metamask');
     })
+    setIssuances(issuanceList);
   }, []);
 
   const onCreateIssuanceClick = () => {
@@ -59,9 +58,9 @@ export const Issuances = () => {
           </Empty>
         ) : (
           <IssuancesTable
-            issuanceTableItems={issuanceTableItems}
+            issuanceTableItems={issuances}
             onIssuanceActionClick={onCreateIssuanceClick}
-            isLoading={!issuanceTableItems.length}
+            isLoading={!issuances.length}
           />
         )}
       </NetworkError>
