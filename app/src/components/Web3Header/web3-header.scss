@@ -3,97 +3,105 @@
 @import '../Layout/skeleton.scss';
 @import '../Layout/font-size.scss';
 
-.cbdc-balances {
-  border-left: 1px solid $grey-300;
-  border-right: 1px solid $grey-300;
-  padding: 0 $normal;
-  gap: $normal;
+.web3-header {
+  flex: 1;
 
-  > button {
-    color: $grey-800;
-    min-width: 12rem;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: $tiny;
-    margin: $tiny 0;
-    background-color: $grey-A100;
-    padding: $tiny $normal;
-
-    &.refresh-button {
-      min-width: auto;
+  &-menu {
+    border-left: 1px solid $grey-300;
+    border-right: 1px solid $grey-300;
+    padding: 0 $normal;
+    gap: $normal;
+  
+    > button {
+      color: $grey-800;
+      min-width: 12rem;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: $tiny;
+      margin: $tiny 0;
       background-color: $grey-A100;
-
-      span.anticon {
-        width: $normal;
-        height: $normal;
-      }
-
-      &:disabled:hover {
+      padding: $tiny $normal;
+  
+      &.refresh-button {
+        min-width: auto;
         background-color: $grey-A100;
+  
+        span.anticon {
+          width: $normal;
+          height: $normal;
+        }
+  
+        &:disabled:hover {
+          background-color: $grey-A100;
+        }
       }
-    }
-
-    &.success {
-      background-color: $green-light;
-
-      &:hover {
-        background-color: $green-main;
+  
+      &.success {
+        background-color: $green-light;
+  
+        &:hover {
+          background-color: $green-main;
+        }
       }
-    }
-
-    &.error {
-      background-color: $red-light;
-
+  
+      &.error {
+        background-color: $red-light;
+  
+        &:active,
+        &:focus {
+          background-color: $red-light;
+        }
+  
+        &:hover {
+          background-color: $red-main;
+        }
+      }
+  
       &:active,
       &:focus {
-        background-color: $red-light;
+        background-color: $grey-A100;
+        border-color: transparent;
+        color: $grey-800;
       }
-
+  
       &:hover {
-        background-color: $red-main;
+        background-color: $grey-400;
+        border-color: transparent;
+        color: $grey-800;
       }
-    }
-
-    &:active,
-    &:focus {
-      background-color: $grey-A100;
-      border-color: transparent;
-      color: $grey-800;
-    }
-
-    &:hover {
-      background-color: $grey-400;
-      border-color: transparent;
-      color: $grey-800;
-    }
-
-    > .react-display-flex-column {
-      align-items: flex-start;
-
-      > span {
-        font-size: $font-large;
-        line-height: $font-large;
-        font-weight: bold;
-
-        &:first-child {
-          font-size: $font-small;
+  
+      > .react-display-flex-column {
+        align-items: flex-start;
+  
+        > span {
+          font-size: $font-large;
           line-height: $font-large;
-          font-weight: 500;
-          opacity: 0.5;
+          font-weight: bold;
+  
+          &:first-child {
+            font-size: $font-small;
+            line-height: $font-large;
+            font-weight: 500;
+            opacity: 0.5;
+          }
+        }
+  
+        &.is-loading {
+          > span:last-child {
+            @include includeLoadingSkeleton($dark: true);
+          }
         }
       }
-
-      &.is-loading {
-        > span:last-child {
-          @include includeLoadingSkeleton($dark: true);
-        }
+  
+      span.anticon {
+        font-size: $font-extra-large;
       }
     }
+  }
 
-    span.anticon {
-      font-size: $font-extra-large;
-    }
+  &-wallet {
+    gap: 10px;
   }
 }

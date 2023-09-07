@@ -9,6 +9,7 @@ import {
 } from '../../components/tables'
 import { divideByCurrencyMultiplicationFactor, toFixed } from '../../formatters'
 import { constants } from '../../config/constants'
+import { minifyAddress } from '../../formatters/web3'
 
 export const buildIssuancesColumns = ({
   onIssuanceActionClick,
@@ -74,5 +75,3 @@ export const buildIssuancesColumns = ({
     ),
   },
 ]
-
-const minifyAddress = (address: string): string => `${address?.slice(0, 2)}...${address?.slice(-6)}`

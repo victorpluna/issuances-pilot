@@ -30,7 +30,6 @@ export const Issuances = () => {
   const isActive = useIsActive();
 
   useEffect(() => {
-    // window.ethereum && metaMask.activate(1);
     void metaMask.connectEagerly().catch(() => {
       console.debug('Failed to connect eagerly to metamask');
     })
