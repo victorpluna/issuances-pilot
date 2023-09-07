@@ -1,0 +1,109 @@
+@import '../../components/Layout/spacing.scss';
+@import '../../components/Layout/mixins.scss';
+@import '../../components/Layout/palette.scss';
+@import '../../components/Layout/skeleton.scss';
+@import '../../theme/mixins.scss';
+
+$create-issuance-height: 60vh;
+
+.issuances-container {
+  padding: $normal;
+  padding-bottom: 0;
+
+  .issuances-table {
+    display: contents;
+
+    .statistics {
+      * {
+        padding-right: $small;
+      }
+    }
+
+    &.is-loading .statistics {
+      .ant-statistic > .ant-statistic-content {
+        @include includeLoadingSkeleton();
+      }
+      .ant-statistic-subtitle {
+        @include includeLoadingSkeleton($size: 'sm');
+      }
+    }
+
+    td:last-of-type {
+      &.ant-table-cell {
+        button {
+          @include include-primary-colors;
+
+          min-width: 5rem;
+          background-color: $grey-A100;
+          border-color: $grey-A100;
+          box-shadow: none;
+          border-radius: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  * > {
+    h1 {
+      opacity: $text-opacity;
+      margin-top: $normal;
+      margin-bottom: $extra-large;
+    }
+  }
+
+  &-filters {
+    padding: $normal 0;
+
+    > * {
+      margin-right: $small;
+    }
+  }
+}
+
+.create-issuance-modal {
+  .ant-modal-body {
+    .ant-spin-nested-loading > div > .ant-spin {
+      max-height: initial;
+    }
+
+    .ant-spin-container > .ant-tabs > .ant-tabs-content-holder > .ant-tabs-content {
+      height: $create-issuance-height;
+      width: 100%;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .create-issuance-tabs {
+      height: 100%;
+
+      > .ant-tabs-nav {
+        background-color: white;
+
+        .ant-tabs-nav-wrap .ant-tabs-nav-list {
+          flex: 1;
+          justify-content: space-between;
+
+          .ant-tabs-tab {
+            flex: 1;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.issuance-status-filter {
+  text-transform: capitalize;
+
+  &-option {
+    * {
+      text-transform: capitalize;
+    }
+  }
+}
