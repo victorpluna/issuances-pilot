@@ -3,6 +3,7 @@ import './layout.scss'
 import { Layout as AntLayout } from 'antd'
 import { Row } from 'react-display-flex'
 import { Web3Header } from '../Web3Header/Web3Header'
+import { hooks } from '../../metamask-connector'
 
 const { Header, Footer, Content } = AntLayout
 
@@ -11,12 +12,15 @@ interface Props {
 }
 
 export const Layout = ({ children }: Props) => {
+  const { useIsActive } = hooks;
+  const isWeb3Active = useIsActive();
+  
   return (
     <AntLayout aria-label="layout" className="layout">
       <Header role="heading">
         <Row alignItemsCenter>
           <img alt="logo" height="50px" src="/images/imperium-logo.svg" />
-          <Web3Header />
+          {isWeb3Active && <Web3Header />}
         </Row>
       </Header>
 

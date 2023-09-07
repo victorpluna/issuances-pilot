@@ -14,6 +14,10 @@ export const constants = {
   // marginPrecision: 4,
   currencyMultiplicationFactor: 1_000,
   currencyMultiplicationAbbreviation: 'T',
+  web3: {
+    contractAddress: '0xcfc6002ebd0b2334f8cbdce81e375df6bc833b9a',
+    chainId: 11155111,
+  },
   // http: {
   //   enabled: process.env.HTTP_AUTH_ENABLED || true,
   //   host: process.env.HTTP_HOST || '0.0.0.0',

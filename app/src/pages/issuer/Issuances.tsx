@@ -9,6 +9,7 @@ import { NetworkError } from '../../components/NetworkError/NetworkError'
 // import { SetupIssuance } from '../create-issuance/SetupIssuance'
 import { IssuancesTable } from './IssuancesTable'
 import { hooks, metaMask } from '../../metamask-connector'
+import { constants } from '../../config/constants'
 
 const issuanceList = [{
   name: 'Test',
@@ -46,7 +47,7 @@ export const Issuances = () => {
   }, []);
 
   const activateConnector = () => {
-    metaMask.activate(1);
+    metaMask.activate(constants.web3.chainId);
   };
 
   return isActive ? (
