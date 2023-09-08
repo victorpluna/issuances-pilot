@@ -12,6 +12,7 @@ import { constants } from '../../../config/constants'
 import { CreateIssuanceModal } from '../CreateIssuance/CreateIssuanceModal'
 
 const issuanceList = [{
+  id: 'asdasdasdasd',
   name: 'Test',
   issuer: '0x35BE4f1Aa18AD52D606E9B2eA257A3416e8030fF',
   targetValue: 1000000,

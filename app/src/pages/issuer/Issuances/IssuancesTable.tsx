@@ -35,7 +35,7 @@ export const IssuancesTable = ({ issuanceTableItems, onIssuanceActionClick, isLo
           loading={isLoading}
           columns={issuancesColumns as any[]}
           dataSource={issuanceTableItems}
-          rowKey="entityId"
+          rowKey="id"
           data-testid="issuances-table"
           fixedHeader
         />
