@@ -1,5 +1,4 @@
-import { Badge, Button, Tag, Tooltip } from 'antd'
-import { Link } from 'react-router-dom'
+import { Tag, Tooltip } from 'antd'
 
 import {
   buildSearchFilterProps,
@@ -10,6 +9,7 @@ import {
 import { divideByCurrencyMultiplicationFactor, toFixed } from '../../../formatters'
 import { constants } from '../../../config/constants'
 import { minifyAddress } from '../../../formatters/web3'
+import { InvestButton } from '../Invest/InvestButton'
 
 export const buildIssuancesColumns = ({
   onIssuanceActionClick,
@@ -66,12 +66,8 @@ export const buildIssuancesColumns = ({
   {
     dataIndex: 'entityId',
     align: 'right',
-    render: (entityId: string) => (
-      <Badge>
-        <Button type="primary">
-            <Link to={`/issuances/${entityId}`}>Invest</Link>
-          </Button>
-      </Badge>
+    render: (id: string) => (
+      <InvestButton />
     ),
   },
 ]

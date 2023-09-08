@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Web3ReactProvider, Web3ReactHooks } from '@web3-react/core';
@@ -19,15 +18,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Web3ReactProvider connectors={connectors}>
-        <Layout>
-          <App />
-        </Layout>
-      </Web3ReactProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <Web3ReactProvider connectors={connectors}>
+      <Layout>
+        <App />
+      </Layout>
+    </Web3ReactProvider>
+  </BrowserRouter>
 );
 
 reportWebVitals();
