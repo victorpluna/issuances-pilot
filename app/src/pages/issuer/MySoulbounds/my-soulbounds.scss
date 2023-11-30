@@ -13,9 +13,13 @@ $create-issuance-height: 60vh;
   .issuances-table {
     display: contents;
 
-    .statistics {
-      * {
-        padding-right: $small;
+    > .flex-row {
+      margin-bottom: $large;
+
+      .statistics {
+        * {
+          padding-right: $small;
+        }
       }
     }
 

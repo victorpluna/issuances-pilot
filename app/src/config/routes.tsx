@@ -1,5 +1,5 @@
 import { RouteProps } from 'react-router-dom'
-import { Issuances } from '../pages/issuer/Issuances/Issuances'
+import { MySoulbounds } from '../pages/issuer/MySoulbounds/MySoulbounds'
 
 
 export const routePaths = {
@@ -9,6 +9,6 @@ export const routePaths = {
 export const routes: RouteProps[] = [
   {
     path: routePaths.root,
-    component: Issuances,
+    component: MySoulbounds,
   },
 ]

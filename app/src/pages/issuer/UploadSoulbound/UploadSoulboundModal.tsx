@@ -3,11 +3,9 @@ import { Formik, FormikProps } from 'formik';
 import { Form, FormItem, Input } from 'formik-antd'
 import { Row } from 'react-display-flex';
 
-import { createIssuanceInformationSchema, initialValues } from './issuance-form-schema';
+import { uploadSoulboundSchema, initialValues } from './upload-soulbound-schema.ts';
 
-import './create-issuance-modal.scss';
-import { InputCurrency } from '../../../components/InputCurrency/InputCurrency';
-import { constants } from '../../../config/constants';
+import './upload-soulbound-modal.scss';
 import React from 'react';
 
 interface Props {
@@ -15,7 +13,7 @@ interface Props {
   onClose: () => void
 }
 
-export const CreateIssuanceModal = ({ visible, onClose }: Props) => {
+export const UploadSoulboundModal = ({ visible, onClose }: Props) => {
   const formRef = React.useRef<FormikProps<any>>();
 
   const onSubmitFormClick = async () => {
@@ -33,19 +31,19 @@ export const CreateIssuanceModal = ({ visible, onClose }: Props) => {
       destroyOnClose
       maskClosable={false}
       keyboard={false}
-      title="Create Issuance"
+      title="Upload Document"
       open={visible}
       width="40vw"
       onCancel={onClose}
       footer={(
         <Button key="publish-issuance" disabled={false} onClick={onSubmitFormClick} type="primary" size="large">
-          Publish issuance
+          Send document
         </Button>
       )}
     >
       <Formik
         onSubmit={handleSubmitForm}
-        validationSchema={createIssuanceInformationSchema}
+        validationSchema={uploadSoulboundSchema}
         initialValues={initialValues}
         innerRef={formRef}
       >
@@ -54,16 +52,12 @@ export const CreateIssuanceModal = ({ visible, onClose }: Props) => {
               <Input name="name" aria-label="Name" />
             </FormItem>
             <Row className="horizontal-form">
-              <FormItem name="targetValue" label={`Target Funds (${constants.currencyMultiplicationAbbreviation})`}>
-                <InputCurrency name="targetValue" aria-label="target funds" precision={constants.inputCurrencyPrecision} />
+              <FormItem name="type" label="Document Type">
+                <Input name="type" aria-label="Document Type" />
               </FormItem>
 
-              <FormItem name="minimumLotsValue" label={`Minimum Amount (${constants.currencyMultiplicationAbbreviation})`}>
-                <InputCurrency
-                  name="minimumLotsValue"
-                  aria-label="minimum amount"
-                  precision={constants.inputCurrencyPrecision}
-                />
+              <FormItem name="document" label="Document">
+                <Input name="document" aria-label="Document" />
               </FormItem>
             </Row>
           </Form>
