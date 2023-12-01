@@ -2,36 +2,37 @@ import { Button, Tooltip } from 'antd'
 import classNames from 'classnames'
 import { Column, Row } from 'react-display-flex'
 import { PlusOutlined, ReloadOutlined, LoadingOutlined } from '@ant-design/icons'
+import { useCallback, useEffect, useState } from 'react';
+import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
 
 import { formatCurrency } from '../../formatters'
-import { hooks, metaMask } from '../../metamask-connector'
+import { metaMask } from '../../metamask-connector'
 import { minifyAddress } from '../../formatters/web3'
 import abi from '../../contract-abi.json'
 
 import './web3-header.scss'
 import { constants } from '../../config/constants';
-import { useEffect, useState } from 'react';
 
 export const Web3Header = () => {
+  const { account, provider } = useWeb3React();
   const [balance, setBalance] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const { useAccount, useProvider } = hooks;
-  const account = useAccount();
-  const provider = useProvider();
-  const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
 
-  const getContractBalance = async () => {
+  const getContractBalance = useCallback(async () => {
     setIsFetching(true);
+    
+    const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
     const contractBalance = await contract.balanceOf(account);
     const formattedBalance = ethers.utils.formatUnits(contractBalance, 18);
+    
     setBalance(formattedBalance);
     setIsFetching(false);
-  };
+  }, [account, provider]);
 
   useEffect(() => {
     getContractBalance();
-  }, []);
+  }, [getContractBalance]);
 
 
   return (

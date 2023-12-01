@@ -1,61 +1,52 @@
 import './my-soulbounds.scss'
 
-import { Button, Row as AntdRow, Col, Statistic } from 'antd'
+import { Button, Row as AntdRow, Col, Statistic, Spin } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
+import { ethers } from 'ethers'
 
 import { Empty } from '../../../components/Empty/Empty'
 import { Column, Row } from '../../../components/Flex/Flex'
 import { NetworkError } from '../../../components/NetworkError/NetworkError'
-import { hooks, metaMask } from '../../../metamask-connector'
 import { constants } from '../../../config/constants'
 import { UploadSoulboundModal } from '../UploadSoulbound/UploadSoulboundModal'
-import { ethers } from 'ethers'
-import abi from '../../../config/contract-abi.json'
 import { TokenCard } from '../../../components/TokenCard/TokenCard'
 import { formatCurrency } from '../../../formatters'
-
-const contractAddress = '0xfFa10e3B8D509A3142402E3c3497a4916e4F05AD'
-const walletAddress = '0x0397a823bfd50f6C1bbC17cfA0C6B38E463241AD'
+import abi from '../../../config/contract-abi.json'
 
 export const MySoulbounds = () => {
-  const { useIsActive } = hooks;
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [contract, setContract] = useState(null);
-  const [tokens, setTokens] = useState([]);
+  const { account, provider } = useWeb3React()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [tokens, setTokens] = useState(null)
+  
+  const getSoulboundTokens = useCallback(async () => {
+    const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
+    const myTokens = await contract.getOwnedTokens(account)
 
-  const isActive = useIsActive();
-
+    setTokens(myTokens)
+  }, [account, provider])
+  
   useEffect(() => {
-    void metaMask.connectEagerly().catch(() => {
-      console.debug('Failed to connect eagerly to metamask')
-    })
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner()
-    const soulboundContract = new ethers.Contract(contractAddress, abi, signer)
-    setContract(soulboundContract)
-    getSoulboundTokens({ contract: soulboundContract })
-  }, []);
-
-  const getSoulboundTokens = async ({ contract }) => {
-    const myTokens = await contract.getOwnedTokens(walletAddress);
-    console.log('myTokens', myTokens)
-    setTokens(myTokens);
-  }
+    getSoulboundTokens()
+  }, [getSoulboundTokens]);
 
   const onCreateIssuanceClick = () => {
-    setIsModalVisible(true);
+    setIsModalVisible(true)
   };
 
   const closeModal = useCallback(() => {
-    setIsModalVisible(false);
+    setIsModalVisible(false)
   }, []);
 
-  const activateConnector = () => {
-    metaMask.activate(constants.web3.chainId);
-  };
+  if (tokens === null) {
+    return (
+      <Row flex={1} alignItemsCenter contentCenter>
+        <Spin />
+      </Row>
+    )
+  }
 
-  return isActive ? (
+  return (
     <Column className="issuances-container" flex={1}>
       <NetworkError error={null}>
         <>
@@ -82,9 +73,9 @@ export const MySoulbounds = () => {
                 </Row>
               </Column>
               <AntdRow gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                {tokens.map((tokenURI) => (
-                  <Col className="gutter-row" span={6}>
-                    <TokenCard key={tokenURI} tokenURI={tokenURI} />
+                {tokens.map((tokenURI, index) => (
+                  <Col key={index} className="gutter-row" span={6}>
+                    <TokenCard tokenURI={tokenURI} />
                   </Col>
                 ))}
               </AntdRow>
@@ -94,16 +85,5 @@ export const MySoulbounds = () => {
       </NetworkError>
       <UploadSoulboundModal visible={isModalVisible} onClose={closeModal} />
     </Column>
-  ) : (
-    <Column className="empty-state" alignItemsCenter contentCenter>
-      <img alt="logo" src="/images/empty-state.png" />
-      <Column>
-        <h3>Wallet connection</h3>
-        <p>Let's connect with your wallet</p>
-      </Column>
-      <Button type="primary" className="confirm-button" onClick={activateConnector}>
-        Connect Wallet
-      </Button>
-    </Column>
-  );
+  )
 }
