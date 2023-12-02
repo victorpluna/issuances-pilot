@@ -19,8 +19,18 @@
 
     &:focus,
     &:active,
-    &:hover {
+    &:hover,
+    &:not(:disabled):not(.ant-btn-disabled):hover {
       color: var(--primary-color-hover);
+    }
+  }
+  &-default {
+    &:focus,
+    &:active,
+    &:hover,
+    &:not(:disabled):not(.ant-btn-disabled):hover {
+      color: var(--primary-color-hover);
+      border-color: var(--primary-color-hover);
     }
   }
 

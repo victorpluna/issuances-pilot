@@ -35,6 +35,7 @@ $modal-padding: $large;
   .ant-modal-close {
     top: $normal;
     right: $modal-padding;
+    width: auto;
 
     .ant-modal-close-x {
       width: inherit;

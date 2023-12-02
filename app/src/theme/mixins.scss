@@ -31,7 +31,7 @@
     color: var(--primary-contrast-color);
   }
 
-  &:hover {
+  &:not(:disabled):not(.ant-btn-disabled):hover {
     background-color: var(--primary-color-hover);
     border-color: var(--primary-color-hover);
     color: var(--primary-contrast-color);
