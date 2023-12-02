@@ -9,10 +9,8 @@ import { ethers } from 'ethers';
 import { formatCurrency } from '../../formatters'
 import { metaMask } from '../../metamask-connector'
 import { minifyAddress } from '../../formatters/web3'
-import abi from '../../contract-abi.json'
 
 import './web3-header.scss'
-import { constants } from '../../config/constants';
 
 export const Web3Header = () => {
   const { account, provider } = useWeb3React();
@@ -22,9 +20,7 @@ export const Web3Header = () => {
   const getContractBalance = useCallback(async () => {
     setIsFetching(true);
     
-    const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
-    const contractBalance = await contract.balanceOf(account);
-    const formattedBalance = ethers.utils.formatUnits(contractBalance, 18);
+    const formattedBalance = ethers.utils.formatUnits(await provider.getBalance(account), 18);
     
     setBalance(formattedBalance);
     setIsFetching(false);
@@ -40,12 +36,13 @@ export const Web3Header = () => {
       <Row className="web3-header-menu">
         <Button type="text" className="success">
           <Column className={classNames({ 'is-loading': isFetching })} justifyContentStart>
-            <span>CBDC Balance</span>
+            <span>Balance</span>
             <span>
               <span>
                 {formatCurrency({
                   value: balance,
-                  minimumPrecision: 0,
+                  minimumPrecision: 3,
+                  currency: 'ETH',
                   notation: 'standard',
                 })}
               </span>
@@ -58,13 +55,6 @@ export const Web3Header = () => {
             {isFetching ? <LoadingOutlined spin /> : <ReloadOutlined />}
           </Button>
         </Tooltip>
-        {/* {isIssuer && cbdcBalance !== undefined && (
-          <Tooltip title="Transaction History">
-            <Button type="text" className="refresh-button" onClick={() => setIsHistoryDrawerOpen(true)}>
-              <FieldTimeOutlined />
-            </Button>
-          </Tooltip>
-        )} */}
       </Row>
       <Row className="web3-header-wallet" alignItemsCenter>
         <Tooltip title={account}>{minifyAddress(account)}</Tooltip>
