@@ -25,6 +25,10 @@
 @import './ant-segmented.scss';
 
 .layout {
+  .container {
+    padding: 0 $normal;
+  }
+
   h1 {
     color: var(--background-main-contrast-color);
   }
