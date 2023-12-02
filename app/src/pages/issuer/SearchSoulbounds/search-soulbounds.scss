@@ -1,0 +1,11 @@
+@import '../../../components/Layout/spacing.scss';
+
+.search-sbt {
+  &-header {
+    margin-bottom: $large;
+  }
+
+  .ant-empty {
+    margin-top: $huge;
+  }
+}
