@@ -30,7 +30,16 @@ export const MySoulbounds = () => {
     getSoulboundTokens()
   }, [getSoulboundTokens]);
 
-  const onCreateIssuanceClick = () => {
+  const uploadSoulboundToken = async ({ tokenURI }) => {
+    const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
+    const tx = await contract.issueDocument(tokenURI)
+    await tx.wait()
+    await getSoulboundTokens()
+    
+    setIsModalVisible(false)
+  }
+
+  const onUploadDocumentClick = () => {
     setIsModalVisible(true)
   };
 
@@ -52,7 +61,7 @@ export const MySoulbounds = () => {
         <>
           {tokens?.length === 0 ? (
             <Empty description="There are no documents uploaded">
-              <Button size="large" onClick={onCreateIssuanceClick} type="primary">
+              <Button size="large" onClick={onUploadDocumentClick} type="primary">
                 Upload Document
               </Button>
             </Empty>
@@ -67,12 +76,12 @@ export const MySoulbounds = () => {
                       value={formatCurrency({ value: 0, minimumPrecision: 2 })}
                     />
                   </Row>
-                  <Button onClick={onCreateIssuanceClick} type="primary" size="large">
+                  <Button onClick={onUploadDocumentClick} type="primary" size="large">
                     Upload Document
                   </Button>
                 </Row>
               </Column>
-              <AntdRow gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+              <AntdRow gutter={[16, 24]}>
                 {tokens.map((tokenURI, index) => (
                   <Col key={index} className="gutter-row" span={6}>
                     <TokenCard tokenURI={tokenURI} />
@@ -83,7 +92,7 @@ export const MySoulbounds = () => {
           )}
         </>
       </NetworkError>
-      <UploadSoulboundModal visible={isModalVisible} onClose={closeModal} />
+      <UploadSoulboundModal visible={isModalVisible} uploadDocument={uploadSoulboundToken} onClose={closeModal} />
     </Column>
   )
 }

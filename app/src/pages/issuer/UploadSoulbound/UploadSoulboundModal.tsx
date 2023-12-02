@@ -1,27 +1,30 @@
+import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { Formik, FormikProps } from 'formik';
 import { Form, FormItem, Input } from 'formik-antd'
-import { Row } from 'react-display-flex';
 
 import { uploadSoulboundSchema, initialValues } from './upload-soulbound-schema.ts';
 
 import './upload-soulbound-modal.scss';
-import React from 'react';
 
 interface Props {
   visible: boolean
   onClose: () => void
+  uploadDocument: ({ tokenURI }: { tokenURI: string }) => Promise<void>
 }
 
-export const UploadSoulboundModal = ({ visible, onClose }: Props) => {
+export const UploadSoulboundModal = ({ visible, uploadDocument, onClose }: Props) => {
+  const [isDocumentUploading, setIsDocumentUploading] = useState(false)
   const formRef = React.useRef<FormikProps<any>>();
 
   const onSubmitFormClick = async () => {
     await formRef.current.submitForm();
   };
 
-  const handleSubmitForm = (values) => {
-    console.log('==handleSubmitForm', values);
+  const handleSubmitForm = async (values) => {
+    setIsDocumentUploading(true)
+    await uploadDocument(values)
+    setIsDocumentUploading(false)
   };
 
   return (
@@ -36,7 +39,13 @@ export const UploadSoulboundModal = ({ visible, onClose }: Props) => {
       width="40vw"
       onCancel={onClose}
       footer={(
-        <Button key="publish-issuance" disabled={false} onClick={onSubmitFormClick} type="primary" size="large">
+        <Button
+          key="publish-issuance"
+          loading={isDocumentUploading}
+          onClick={onSubmitFormClick}
+          type="primary"
+          size="large"
+        >
           Send document
         </Button>
       )}
@@ -48,18 +57,9 @@ export const UploadSoulboundModal = ({ visible, onClose }: Props) => {
         innerRef={formRef}
       >
           <Form className="issuance-form" role="form" layout="vertical" autoComplete="off">
-            <FormItem name="name" label="Name">
-              <Input name="name" aria-label="Name" />
+            <FormItem name="tokenURI" label="Document Link (IPFS)">
+              <Input name="tokenURI" aria-label="tokenURI" />
             </FormItem>
-            <Row className="horizontal-form">
-              <FormItem name="type" label="Document Type">
-                <Input name="type" aria-label="Document Type" />
-              </FormItem>
-
-              <FormItem name="document" label="Document">
-                <Input name="document" aria-label="Document" />
-              </FormItem>
-            </Row>
           </Form>
       </Formik>
     </Modal>
