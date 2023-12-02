@@ -1,0 +1,1 @@
+export const SearchSoulbounds = () => <h2>Search soulbounds</h2>
