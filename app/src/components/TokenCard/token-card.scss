@@ -1,0 +1,10 @@
+.ant-card {
+  &-cover {
+    height: 350px;
+    display: flex;
+
+    img {
+      margin: auto 0;
+    }
+  }
+}

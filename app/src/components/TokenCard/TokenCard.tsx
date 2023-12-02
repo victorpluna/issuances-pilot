@@ -1,3 +1,4 @@
+import './token-card.scss'
 import { Card, Button, Typography } from 'antd'
 import useSWR from 'swr'
 import { FileProtectOutlined } from '@ant-design/icons';
