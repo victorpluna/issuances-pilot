@@ -15,24 +15,24 @@ import { formatCurrency } from '../../../formatters'
 import abi from '../../../config/contract-abi.json'
 
 export const MySoulbounds = () => {
-  const { account, provider } = useWeb3React()
+  const { provider } = useWeb3React()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [tokens, setTokens] = useState(null)
   
   const getSoulboundTokens = useCallback(async () => {
     const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
-    const myTokens = await contract.getOwnedTokens(account)
+    const myTokens = await contract.getOwnedTokens()
 
     setTokens(myTokens)
-  }, [account, provider])
+  }, [provider])
   
   useEffect(() => {
     getSoulboundTokens()
   }, [getSoulboundTokens]);
 
-  const uploadSoulboundToken = async ({ tokenURI }) => {
+  const uploadSoulboundToken = async ({ tokenURI, price }) => {
     const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
-    const tx = await contract.issueDocument(tokenURI)
+    const tx = await contract.issueDocument(tokenURI, ethers.utils.parseUnits(price, 18))
     await tx.wait()
     await getSoulboundTokens()
     
@@ -82,9 +82,9 @@ export const MySoulbounds = () => {
                 </Row>
               </Column>
               <AntdRow gutter={[16, 24]}>
-                {tokens.map((tokenURI, index) => (
+                {tokens.map(({ url, price }, index) => (
                   <Col key={index} className="gutter-row" span={6}>
-                    <TokenCard tokenURI={tokenURI} />
+                    <TokenCard tokenURI={url} price={price} />
                   </Col>
                 ))}
               </AntdRow>

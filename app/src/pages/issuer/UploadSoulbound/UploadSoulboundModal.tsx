@@ -60,6 +60,9 @@ export const UploadSoulboundModal = ({ visible, uploadDocument, onClose }: Props
             <FormItem name="tokenURI" label="Document Link (IPFS)">
               <Input name="tokenURI" aria-label="tokenURI" />
             </FormItem>
+            <FormItem name="price" label="Price">
+              <Input name="price" aria-label="price" />
+            </FormItem>
           </Form>
       </Formik>
     </Modal>

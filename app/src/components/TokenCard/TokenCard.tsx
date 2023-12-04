@@ -4,16 +4,17 @@ import useSWR from 'swr'
 import { FileProtectOutlined } from '@ant-design/icons';
 
 import { fetcher } from '../../config/fetcher'
-import { formatCurrency } from '../../formatters';
+import { ethers } from 'ethers';
 
 const { Meta } = Card
 const { Title } = Typography
 
 interface Props {
   tokenURI: string
+  price: number
 }
 
-export const TokenCard = ({ tokenURI }: Props) => {
+export const TokenCard = ({ tokenURI, price }: Props) => {
   const { data, isLoading } = useSWR(tokenURI, fetcher)
   
   return (
@@ -23,7 +24,7 @@ export const TokenCard = ({ tokenURI }: Props) => {
     loading={isLoading}
     cover={<img alt="Document" src={data?.image} />}
     actions={[
-      <Title level={5}>{formatCurrency({ value: 10, minimumPrecision: 2 })}</Title>,
+      <Title level={5}>ETH: {ethers.utils.formatUnits(price, 18)}</Title>,
       <Button type="default"><FileProtectOutlined key="approvals" /> Check approvals</Button>,
     ]}
   >

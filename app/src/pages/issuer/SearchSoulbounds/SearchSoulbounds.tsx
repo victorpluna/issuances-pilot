@@ -53,7 +53,7 @@ export const SearchSoulbounds = () => {
         <Row gutter={[16, 24]}>
           {tokens?.map((tokenURI, index) => (
             <Col key={index} className="gutter-row" span={6}>
-              <TokenCard tokenURI={tokenURI} />
+              <TokenCard tokenURI={tokenURI} price={10} />
             </Col>
           ))}
         </Row>
