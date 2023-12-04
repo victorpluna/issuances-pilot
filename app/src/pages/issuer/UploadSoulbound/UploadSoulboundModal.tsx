@@ -60,7 +60,7 @@ export const UploadSoulboundModal = ({ visible, uploadDocument, onClose }: Props
             <FormItem name="tokenURI" label="Document Link (IPFS)">
               <Input name="tokenURI" aria-label="tokenURI" />
             </FormItem>
-            <FormItem name="price" label="Price">
+            <FormItem name="price" label="Price (ETH)">
               <Input name="price" aria-label="price" />
             </FormItem>
           </Form>

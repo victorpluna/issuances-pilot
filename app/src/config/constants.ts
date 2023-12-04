@@ -15,7 +15,7 @@ export const constants = {
   currencyMultiplicationFactor: 1_000,
   currencyMultiplicationAbbreviation: 'T',
   web3: {
-    contractAddress: '0xDfDA2271CF68eA694709E915bdbEF43F7B6F0e76',
+    contractAddress: '0x46aC468aF3733e15e59f534f94535005838fcc16',
     chainId: 11155111,
   },
   // http: {

@@ -22,11 +22,12 @@ export const SearchSoulbounds = () => {
     const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
     
     try {
-      const foundTokens = await contract.getOwnedTokens(walletAddress)
+      const foundTokens = await contract.getDocumentsFromWallet(walletAddress)
       console.log('foundTokens', foundTokens)
   
       setTokens(foundTokens)
-    } catch (_) {
+    } catch (error) {
+      console.log(error)
       setTokens([])
     }
     setIsSearching(false)
@@ -51,9 +52,9 @@ export const SearchSoulbounds = () => {
       {isSearching && <Spin />}
       {tokens?.length === 0 ? <Empty description="There are no documents" /> : (
         <Row gutter={[16, 24]}>
-          {tokens?.map((tokenURI, index) => (
+          {tokens?.map(({ url, price }, index) => (
             <Col key={index} className="gutter-row" span={6}>
-              <TokenCard tokenURI={tokenURI} price={10} />
+              <TokenCard tokenURI={url} price={price} />
             </Col>
           ))}
         </Row>

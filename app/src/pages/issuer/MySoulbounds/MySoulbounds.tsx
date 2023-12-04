@@ -21,7 +21,7 @@ export const MySoulbounds = () => {
   
   const getSoulboundTokens = useCallback(async () => {
     const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
-    const myTokens = await contract.getOwnedTokens()
+    const myTokens = await contract.getOwnedDocuments()
 
     setTokens(myTokens)
   }, [provider])
