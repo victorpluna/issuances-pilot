@@ -7,9 +7,11 @@ export const uploadSoulboundFormErrors = {
 export const initialValues = {
   tokenURI: '',
   price: '',
+  kind: '',
 };
 
 export const uploadSoulboundSchema = object().shape({
   tokenURI: string().required(uploadSoulboundFormErrors.requiredNameField('tokenURI')),
   price: number().required(uploadSoulboundFormErrors.requiredNameField('number')),
+  kind: string().required(uploadSoulboundFormErrors.requiredNameField('kind')),
 });

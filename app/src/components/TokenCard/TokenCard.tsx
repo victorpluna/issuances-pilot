@@ -11,10 +11,11 @@ const { Title } = Typography
 
 interface Props {
   tokenURI: string
+  kind: string
   price: number
 }
 
-export const TokenCard = ({ tokenURI, price }: Props) => {
+export const TokenCard = ({ tokenURI, price, kind }: Props) => {
   const { data, isLoading } = useSWR(tokenURI, fetcher)
   console.log('tokenURI', tokenURI)
   console.log('data', data)
@@ -24,13 +25,13 @@ export const TokenCard = ({ tokenURI, price }: Props) => {
     hoverable
     bordered={false}
     loading={isLoading}
-    cover={<Image alt="Document" src={data?.image} fallback="/images/protected-image.jpeg" />}
+    cover={<Image alt="Document" src={data?.image} fallback={!tokenURI && '/images/protected-image.jpeg'} />}
     actions={[
       <Title level={5}>ETH: {ethers.utils.formatUnits(price, 18)}</Title>,
       <Button type="default"><FileProtectOutlined key="approvals" /> {tokenURI ? 'Check approvals' : 'Request access'}</Button>,
     ]}
   >
-    <Meta title="University Degree" description={data?.description} />
+    <Meta title={kind} description={data?.description} />
   </Card>
   )
 }

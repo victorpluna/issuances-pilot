@@ -52,9 +52,9 @@ export const SearchSoulbounds = () => {
       {isSearching && <Spin />}
       {tokens?.length === 0 ? <Empty description="There are no documents" /> : (
         <Row gutter={[16, 24]}>
-          {tokens?.map(({ url, price }, index) => (
+          {tokens?.map(({ url, price, kind }, index) => (
             <Col key={index} className="gutter-row" span={6}>
-              <TokenCard tokenURI={url} price={price} />
+              <TokenCard tokenURI={url} price={price} kind={kind} />
             </Col>
           ))}
         </Row>

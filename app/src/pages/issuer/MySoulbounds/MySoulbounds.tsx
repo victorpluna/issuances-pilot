@@ -30,9 +30,9 @@ export const MySoulbounds = () => {
     getSoulboundTokens()
   }, [getSoulboundTokens]);
 
-  const uploadSoulboundToken = async ({ tokenURI, price }) => {
+  const uploadSoulboundToken = async ({ tokenURI, price, kind }) => {
     const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
-    const tx = await contract.issueDocument(tokenURI, ethers.utils.parseUnits(price, 18))
+    const tx = await contract.issueDocument(tokenURI, ethers.utils.parseUnits(price, 18), kind)
     await tx.wait()
     await getSoulboundTokens()
     
@@ -82,9 +82,9 @@ export const MySoulbounds = () => {
                 </Row>
               </Column>
               <AntdRow gutter={[16, 24]}>
-                {tokens.map(({ url, price }, index) => (
+                {tokens.map(({ url, price, kind }, index) => (
                   <Col key={index} className="gutter-row" span={6}>
-                    <TokenCard tokenURI={url} price={price} />
+                    <TokenCard tokenURI={url} price={price} kind={kind} />
                   </Col>
                 ))}
               </AntdRow>
