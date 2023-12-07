@@ -8,11 +8,14 @@ import { ethers } from "ethers"
 import { constants } from "../../../config/constants"
 import { TokenCard } from "../../../components/TokenCard/TokenCard"
 import abi from '../../../config/contract-abi.json'
+import { PaySoulboundAccessModal } from "../PaySoulboundAccess/PaySoulboundAccessModal"
 
 
 export const SearchSoulbounds = () => {
   const { provider } = useWeb3React()
+  const [form] = Form.useForm();
   const [tokens, setTokens] = useState([])
+  const [selectedToken, setSelectedToken] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
 
   const searchSoulboundTokens = useCallback(async ({ walletAddress }) => {
@@ -23,7 +26,6 @@ export const SearchSoulbounds = () => {
     
     try {
       const foundTokens = await contract.getDocumentsFromWallet(walletAddress)
-      console.log('foundTokens', foundTokens)
   
       setTokens(foundTokens)
     } catch (error) {
@@ -33,9 +35,18 @@ export const SearchSoulbounds = () => {
     setIsSearching(false)
   }, [provider])
 
+  const onPayButtonClick = async ({ tokenId, price }) => {
+    const contract = new ethers.Contract(constants.web3.contractAddress, abi, provider.getSigner())
+    const tx = await contract.payAccess(tokenId, { value: price })
+    await tx.wait()
+    
+    setSelectedToken(null)
+    form.submit()
+  }
+
   return (
     <Column className="search-sbt" flex>
-      <Form onFinish={searchSoulboundTokens}>
+      <Form form={form} onFinish={searchSoulboundTokens}>
         <Row className="search-sbt-header" gutter={24}>
           <Col span="10">
             <Form.Item 
@@ -52,13 +63,19 @@ export const SearchSoulbounds = () => {
       {isSearching && <Spin />}
       {tokens?.length === 0 ? <Empty description="There are no documents" /> : (
         <Row gutter={[16, 24]}>
-          {tokens?.map(({ url, price, kind }, index) => (
+          {tokens?.map(({ url, price, kind, tokenId }, index) => (
             <Col key={index} className="gutter-row" span={6}>
-              <TokenCard tokenURI={url} price={price} kind={kind} />
+              <TokenCard
+                tokenURI={url}
+                price={price}
+                kind={kind}
+                onPayButtonClick={() => setSelectedToken({ url, price, kind, tokenId })}
+              />
             </Col>
           ))}
         </Row>
       )}
+      <PaySoulboundAccessModal visible={!!selectedToken} token={selectedToken} payDocument={onPayButtonClick} onClose={() => setSelectedToken(null)} />
     </Column>
   )
 }
