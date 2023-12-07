@@ -13,14 +13,17 @@ contract DocumentSBT is ERC721, ERC721URIStorage, ERC721Enumerable {
     constructor() ERC721("DocumentSBT", "DocumentSBT") {}
 
     struct Document {
+        uint256 tokenId;
         string url;
+        string kind;
         uint256 price;
         uint256 timestamp;
     }
 
     mapping (uint256 => Document) private documents;
+    mapping (uint256 => address[]) private access;
 
-    function issueDocument(string memory documentURI, uint256 price) public returns (uint256) {
+    function issueDocument(string memory documentURI, uint256 price, string memory kind) public returns (uint256) {
 
         _tokenIds.increment();
 
@@ -29,7 +32,9 @@ contract DocumentSBT is ERC721, ERC721URIStorage, ERC721Enumerable {
         _setTokenURI(newItemId, documentURI);
 
         Document memory newDocument = Document({
+            tokenId: newItemId,
             url: documentURI,
+            kind: kind,
             price: price,
             timestamp: block.timestamp
         });
@@ -60,11 +65,40 @@ contract DocumentSBT is ERC721, ERC721URIStorage, ERC721Enumerable {
         for (uint256 i = 0; i < tokenCount; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(owner, i);
             Document memory document = documents[tokenId];
-            document.url = "";
+            
+            if (!_isAccessGranted(tokenId, msg.sender)) {
+                document.url = "";
+            }
+            
             myDocuments[i] = document;
         }
 
         return myDocuments;
+    }
+
+    function payAccess(uint256 tokenId) public payable {
+        Document memory document = documents[tokenId];
+        require(msg.sender.balance >= document.price, "Insufficient balance");
+        require(msg.value == document.price, "Invalid document value");
+
+        address owner = ownerOf(tokenId);
+
+        bool success = payable(owner).send(document.price);
+        require(success, "Transfer failed");
+
+        access[tokenId].push(msg.sender);
+    }
+
+    function _isAccessGranted(uint256 tokenId, address user) public view returns (bool) {
+        address[] storage accessList = access[tokenId];
+
+        for (uint256 i = 0; i < accessList.length; i++) {
+            if (accessList[i] == user) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // The following functions are overrides required by Solidity.
